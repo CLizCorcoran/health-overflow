@@ -1,0 +1,20 @@
+$navColor: #eb6864;
+
+#splash {
+    i {
+        color: $navColor;
+    }
+
+    .pic {
+        position: relative;
+        
+        margin: 10px;
+       
+    }
+}
+
+
+#login {
+    position: absolute;
+    right: .5rem;
+}

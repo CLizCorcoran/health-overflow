@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import NavBar from "./NavBar";
+import Splash from "./Splash";
 import '../css/journal.css';
 
 
@@ -22,9 +23,14 @@ function App() {
         <header className="App-header">
           <NavBar />
         </header>
-        <p>
-          API Response: {apiResponse}
-        </p>
+        <body>
+          <p>
+            API Response: {apiResponse}
+          </p>
+          <Splash />
+
+        </body>
+ 
       </div>
     </BrowserRouter>
   );
