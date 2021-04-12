@@ -15,13 +15,18 @@ function Splash() {
 
             <h1 className="text-center mb-5"><i className="fas fa-heartbeat mr-2" title="Health Overflow" />Health Overflow</h1>
 
-            <div className="row justify-content-center">
+            <h3 className="text-center">Where the world comes together to help each other grow in body, mind, and spirit.</h3>
+            <div className="text-center mt-3">
+                <button className="btn btn-primary">ENTER</button>
+            </div>
+
+            <div className="row justify-content-center mt-5">
                 <div class="column">
                     <div className="pic">
-                        <img className="pic mr-3" src={fruit} alt="fruit" width="300"></img>
+                        <img src={fruit} alt="fruit" width="300"></img>
                     </div>
                     <div className="pic">
-                        <img className="pic mr-3" src={runner} alt="runner" width="300"></img>
+                        <img src={runner} alt="runner" width="300"></img>
                     </div>
 
 
@@ -29,10 +34,10 @@ function Splash() {
 
                 <div className="column">
                     <div className="pic">
-                        <img className="pic" src={pills} alt="health word" width="300"></img>
+                        <img src={pills} alt="health word" width="300"></img>
                     </div>
                     <div className="pic">
-                        <img className="pic" src={yoga} alt="yoga" width="300"></img>
+                        <img src={yoga} alt="yoga" width="300"></img>
 
                     </div>
 
