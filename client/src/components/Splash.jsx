@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import fruit from "../image/pexels-element-digital-775032.jpg";
 import pills from "../image/pexels-miguel-á-padriñán-806427.jpg";
 import runner from "../image/pexels-pixabay-235922.jpg";
@@ -17,7 +18,7 @@ function Splash() {
 
             <h3 className="text-center">Where the world comes together to help each other grow in body, mind, and spirit.</h3>
             <div className="text-center mt-3">
-                <button className="btn btn-primary">ENTER</button>
+                <Link id="btnEnter" className="btn btn-primary" role="button" to="/questions">ENTER</Link>
             </div>
 
             <div className="row justify-content-center mt-5">

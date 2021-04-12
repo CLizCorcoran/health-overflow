@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Splash from "./Splash";
+import Questions from "./Questions";
 import '../css/journal.css';
 
 
@@ -27,7 +28,10 @@ function App() {
           <p>
             API Response: {apiResponse}
           </p>
-          <Splash />
+          <Switch>
+            <Route exact from='/' component={Splash}/>
+            <Route exact path="/questions" component={Questions} />
+          </Switch>
 
         </body>
  

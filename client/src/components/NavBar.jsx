@@ -14,7 +14,7 @@ const NavBar = () => {
 
     return (
         <div className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <NavTab to="#" label="Health Overflow" />
+            <NavTab to="/" label="Health Overflow" />
    
             <div id="login">
                 <button class="btn btn-primary mr-1 my-2 my-sm-0" type="submit">Log in</button>

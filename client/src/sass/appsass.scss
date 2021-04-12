@@ -11,6 +11,31 @@ $navColor: #eb6864;
     }
 }
 
+#questions {
+    i {
+        color: $navColor;
+    }
+
+    .divStatistics {
+        float:left;
+        width: 70px;
+        text-align: center;
+    }
+    .question {
+        float:left;
+        height: 100%;
+        vertical-align: center;
+    }
+
+    br {
+        clear: both;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
 
 #login {
     position: absolute;
