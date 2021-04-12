@@ -22,17 +22,21 @@ $navColor: #eb6864;
         text-align: center;
     }
     .question {
-        float:left;
-        height: 100%;
-        vertical-align: center;
+        display: inline;
+        
     }
 
-    br {
+    hr {
         clear: both;
     }
 
     a {
         text-decoration: none;
+        font-size: 1.25rem;
+    }
+
+    #btnAsk {
+        float: right;
     }
 }
 
