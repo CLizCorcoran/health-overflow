@@ -11,20 +11,26 @@ var testAPIRouter = require('./routes/testAPI');
 
 var app = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
-app.use(cors());
+var corsOptions = {
+  origin: "http://localhost:9001"
+};
+
+app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true })); 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
+require('./routes/question.routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,5 +47,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// Sync health database
+const db = require("./models");
+//db.sequelize.sync();
+// In development, you may need to drop existing tables and re-sync database.
+//  This is done by setting force: true
+db.sequelize.sync({ force: true }).then(() => {
+ console.log("Drop and re-sync db.");
+});
+
+
 
 module.exports = app;
