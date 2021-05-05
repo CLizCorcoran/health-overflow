@@ -20,7 +20,7 @@ var corsOptions = {
   origin: "http://localhost:9001"
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
@@ -50,12 +50,12 @@ app.use(function(err, req, res, next) {
 
 // Sync health database
 const db = require("./models");
-//db.sequelize.sync();
+db.sequelize.sync();
 // In development, you may need to drop existing tables and re-sync database.
 //  This is done by setting force: true
-db.sequelize.sync({ force: true }).then(() => {
- console.log("Drop and re-sync db.");
-});
+//db.sequelize.sync({ force: true }).then(() => {
+// console.log("Drop and re-sync db.");
+//});
 
 
 

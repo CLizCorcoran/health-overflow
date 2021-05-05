@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../css/journal.css';
 import '../sass/appsass.scss';
@@ -29,7 +29,7 @@ const Question = props => {
     return(        
     <div>
         <div className="divStatistics text-muted small pr-2 mb-1" width="50px">
-            {props.vote}<br/> Votes
+            0<br/> Votes
             <br/>
             0<br/> Answers
         </div>
@@ -44,16 +44,30 @@ const Question = props => {
     )
 }
 
-function Questions() {    
+function Questions() {   
+    // Supports paging (not using yet) but also keeps the fetch from
+    //  happening over and over and over again.  
+    const [page, setPage] = useState(1); 
+    const [stuff, setStuff] = useState([]);
+
+    useEffect( () => {
+        fetch("http://localhost:9000/api/questions/")
+            .then(res => res.json())
+            .then(response => {
+                console.log("Setting stuff");
+                setStuff(response);
+            })
+            .catch( error => console.log(error));
+    }, [page]);
     
     return (
         <div id="questions" className="container">
             <h3 className="mb-4">All Questions<Link id="btnAsk" className="btn btn-primary" role="button" to="#">Ask Question</Link></h3>
             <hr />
-            {questions.map((item, i) => {
+            {stuff.map((item, i) => {
                 return (
                     <div>
-                        <Question question={item.question} details={item.details} user={item.user} vote={item.vote} />
+                        <Question question={item.title} details={item.description} />
                     </div>
                 )
             })}

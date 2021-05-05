@@ -17,8 +17,8 @@ const NavBar = () => {
             <NavTab to="/" label="Health Overflow" />
    
             <div id="login">
-                <button class="btn btn-primary mr-1 my-2 my-sm-0" type="submit">Log in</button>
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Sign up</button>
+                <button className="btn btn-primary mr-1 my-2 my-sm-0" type="submit">Log in</button>
+                <button className="btn btn-secondary my-2 my-sm-0" type="submit">Sign up</button>
             </div>
 
         </div>

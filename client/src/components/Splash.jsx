@@ -22,7 +22,7 @@ function Splash() {
             </div>
 
             <div className="row justify-content-center mt-5">
-                <div class="column">
+                <div className="column">
                     <div className="pic">
                         <img src={fruit} alt="fruit" width="300"></img>
                     </div>
