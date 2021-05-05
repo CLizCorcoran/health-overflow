@@ -1,0 +1,5 @@
+const FILTER_EVENT_ITEMS = "FILTER_EVENT_ITEMS";
+
+module.exports = {
+    FILTER_EVENT_ITEMS
+};

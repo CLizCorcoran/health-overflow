@@ -1,3 +1,5 @@
+@import '../css/journal.css';
+
 $navColor: #eb6864;
 
 #splash {
@@ -11,7 +13,28 @@ $navColor: #eb6864;
     }
 }
 
+#questions_page {
+    border: 3px solid #fff;
+    padding: 20px;
+    display: flex;
+    align-content: flex-start;
+    max-width: 1000px;
+}
+
+#filter_div {
+    width: 10em;
+    display: inline-block;
+    flex-grow: 0;
+    padding-right: 20px;    
+}
+
 #questions {
+    min-width: 400px;
+    flex-grow: 1000;
+    display: inline-block;
+    padding: 0px 20px;
+    border-left: 2px solid red; 
+
     i {
         color: $navColor;
     }

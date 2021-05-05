@@ -21,20 +21,17 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <header className="App-header">
-          <NavBar />
-        </header>
-        <body>
-          <p>
-            API Response: {apiResponse}
-          </p>
-          <Switch>
-            <Route exact from='/' component={Splash}/>
-            <Route exact path="/questions" component={Questions} />
-          </Switch>
+        <NavBar />
 
-        </body>
- 
+        <Switch>
+          <Route exact from='/' component={Splash} />
+          <Route exact path="/questions" component={Questions} />
+        </Switch>
+
+        <p>
+          API Response: {apiResponse}
+        </p>
+
       </div>
     </BrowserRouter>
   );
