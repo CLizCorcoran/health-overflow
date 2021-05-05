@@ -45,7 +45,7 @@ const Question = props => {
     )
 }
 
-function Questions(props) {
+const Questions = props => {
     // Supports paging (not using yet) but also keeps the fetch from
     //  happening over and over and over again.  
     const [page, setPage] = useState(1);
@@ -61,11 +61,16 @@ function Questions(props) {
             .catch(error => console.log(error));
     }, [page]);
 
+    let header = "All Questions";
+    if (props.filter != "all")
+        header = "Questions (" + props.filter + ")";
+
+
     return (
         <div id="questions_page">
             <FilterContainer />
             <div id="questions" className="container">
-                <h3 className="mb-4">All Questions ({props.filter})<Link id="btnAsk" className="btn btn-primary" role="button" to="#">Ask Question</Link></h3>
+                <h3 className="mb-4">{header}<Link id="btnAsk" className="btn btn-primary" role="button" to="#">Ask Question</Link></h3>
                 <hr />
                 {stuff.map((item, i) => {
                     return (
