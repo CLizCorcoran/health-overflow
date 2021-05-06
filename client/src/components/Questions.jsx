@@ -48,18 +48,22 @@ const Question = props => {
 const Questions = props => {
     // Supports paging (not using yet) but also keeps the fetch from
     //  happening over and over and over again.  
-    const [page, setPage] = useState(1);
+    //const [page, setPage] = useState(1);
     const [stuff, setStuff] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:9000/api/questions/")
+        let url = "http://localhost:9000/api/questions/";
+        if (props.filter != "all")
+            url += "?category=" + props.filter;
+
+        fetch(url)
             .then(res => res.json())
             .then(response => {
                 console.log("Setting stuff");
                 setStuff(response);
             })
             .catch(error => console.log(error));
-    }, [page]);
+    }, [props.filter]);
 
     let header = "All Questions";
     if (props.filter != "all")

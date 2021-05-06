@@ -15,7 +15,8 @@ exports.create = (req, res) => {
     // Create a Question
     const question = {
         title: req.body.title,
-        description: req.body.description 
+        description: req.body.description,
+        category: req.body.category
     };
 
     // Save Question in the database
@@ -34,8 +35,9 @@ exports.create = (req, res) => {
 
 // Retrieve all Questions from the database
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    const category = req.query.category;
+    var condition = category ? { category: `${category}`} : null;
+    //var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
     Question.findAll({ where: condition })
         .then(data => {
