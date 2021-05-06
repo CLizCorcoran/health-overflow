@@ -74,7 +74,7 @@ const Questions = props => {
         <div id="questions_page">
             <FilterContainer />
             <div id="questions" className="container">
-                <h3 className="mb-4">{header}<Link id="btnAsk" className="btn btn-primary" role="button" to="#">Ask Question</Link></h3>
+                <h3 className="mb-4">{header}<Link id="btnAsk" className="btn btn-primary" role="button" to="/questions/ask">Ask Question</Link></h3>
                 <hr />
                 {stuff.map((item, i) => {
                     return (
