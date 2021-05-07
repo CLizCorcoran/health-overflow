@@ -24,11 +24,11 @@ const Filter = props => {
 
     return (
         <div id="filter_div" className="btn-group-vertical">
-            <FilterButton label="All" id="all" active={props.filter == "all"} onChange={() => props.onFilter("all") } />
-            <FilterButton label="Food" id="food" active={props.filter == "food"} onChange={() => props.onFilter("food") } />
-            <FilterButton label="Exercise" id="exercise" active={props.filter == "exercise"} onChange={() => props.onFilter("exercise") } />
-            <FilterButton label="Mediation" id="meditation" active={props.filter == "mediation"} onChange={() => props.onFilter("mediation") } />
-            <FilterButton label="Supplements" id="supplements" active={props.filter == "supplements"} onChange={() => props.onFilter("supplements") } />
+            <FilterButton label="All" id="all" active={props.filter === "all"} onChange={() => props.onFilter("all") } />
+            <FilterButton label="Food" id="food" active={props.filter === "food"} onChange={() => props.onFilter("food") } />
+            <FilterButton label="Exercise" id="exercise" active={props.filter === "exercise"} onChange={() => props.onFilter("exercise") } />
+            <FilterButton label="Mediation" id="meditation" active={props.filter === "mediation"} onChange={() => props.onFilter("mediation") } />
+            <FilterButton label="Supplements" id="supplements" active={props.filter === "supplements"} onChange={() => props.onFilter("supplements") } />
         </div>
     );
 }

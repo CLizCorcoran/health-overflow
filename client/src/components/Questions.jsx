@@ -53,7 +53,7 @@ const Questions = props => {
 
     useEffect(() => {
         let url = "http://localhost:9000/api/questions/";
-        if (props.filter != "all")
+        if (props.filter !== "all")
             url += "?category=" + props.filter;
 
         fetch(url)
@@ -66,7 +66,7 @@ const Questions = props => {
     }, [props.filter]);
 
     let header = "All Questions";
-    if (props.filter != "all")
+    if (props.filter !== "all")
         header = "Questions (" + props.filter + ")";
 
 

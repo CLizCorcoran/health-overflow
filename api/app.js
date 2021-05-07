@@ -6,11 +6,15 @@ var logger = require('morgan');
 var cors = require("cors");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/user.routes');
 var testAPIRouter = require('./routes/testAPI');
 
 var app = express();
+var passport = require('passport');
+var session = require('express-session');
 
+// Module to handle environment variables
+//var env = require('dotenv').load();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,15 +26,24 @@ var corsOptions = {
 
 app.use(cors());
 app.use(logger('dev'));
+// REMEMBER - body parser is deprecated.  
+//  Using express.json is the new way to go.  
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// Set up Passport
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true}));  // session secret
+app.use(passport.initialize());
+app.use(passport.session());  // persistent login sessions
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
 require('./routes/question.routes')(app);
+require('./routes/user.routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,6 +69,16 @@ db.sequelize.sync();
 //db.sequelize.sync({ force: true }).then(() => {
 // console.log("Drop and re-sync db.");
 //});
+
+// Passport serialization code
+//  http://www.passportjs.org/docs/configure/
+passport.serializeUser(function(user, done) {
+  done(null, {id: user.id, username: user.username, role: user.role});
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, {id: user.id, usernmae: user.username, role: user.role});
+});
 
 
 
