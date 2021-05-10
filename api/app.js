@@ -70,15 +70,7 @@ db.sequelize.sync();
 // console.log("Drop and re-sync db.");
 //});
 
-// Passport serialization code
-//  http://www.passportjs.org/docs/configure/
-passport.serializeUser(function(user, done) {
-  done(null, {id: user.id, username: user.username, role: user.role});
-});
 
-passport.deserializeUser(function(user, done) {
-  done(null, {id: user.id, usernmae: user.username, role: user.role});
-});
 
 
 

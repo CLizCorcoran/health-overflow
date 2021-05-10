@@ -6,26 +6,47 @@ var passport = require('passport'),
 const { nextTick } = require("process");
 
 
-passport.use(new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password'
-},
+passport.use(new LocalStrategy(
+    {
+        usernameField: 'username',
+        passwordField: 'password'
+    },
+
     async function (username, password, done) {
-        var user = User.findOne(
-            {
-                where: {
-                    username: username
-                }
-            });
+        var user = await User.findOne({ where: { username: username } });
+
         if (user == null) {
-            return done(null, false, { message: 'Unknown user.' });
+        return done(null, false, { message: 'Incorrect username.' });
         }
-        if (!user.validPassword(password)) {
+
+        if (!user.verifyPassword(password)) {
             return done(null, false, { message: 'Incorrect password.' });
         }
+
         return done(null, user);
     }
 ));
+
+User.prototype.verifyPassword = function(password) {
+    var testpswd = crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('base64');
+    if (testpswd == this.password)
+        return true;
+    else
+        return false;
+
+};
+
+// Passport serialization code
+//  http://www.passportjs.org/docs/configure/
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
+  });
 
 
 // Checks if password has > 8 characters
@@ -44,7 +65,7 @@ function isValidUsername(username) {
 }
 
 // Create and Save a new User
-exports.create = (req, res) => {
+exports.create = async (req, res, next) => {
     var salt = crypto.randomBytes(64).toString('hex');
     var password = crypto.pbkdf2Sync(req.body.password, salt, 10000, 64, 'sha512').toString('base64');
 
@@ -68,19 +89,33 @@ exports.create = (req, res) => {
     try {
         var user = User.create(userInfo);
     } catch (err) {
-        return res.json({status: 'error', message: 'Username already exists'});
+        return res.json({ status: 'error', message: 'Username already exists' });
     }
 
     if (user) {
-        passport.authenticate('local', function(err, user, info) {
+        passport.authenticate('local', function (err, user, info) {
             if (err) { return next(err); }
             if (!user) {
-                return res.json({status: 'error', message: info.message});
+                return res.json({ status: 'error', message: info.message });
             }
-            req.logIn(user, function(err) {
+            req.logIn(user, function (err) {
                 if (err) { return next(err); }
-                return res.json({status: 'ok'});
+                return res.json({ status: 'ok' });
             });
         })(req, res, next);
     }
+};
+
+
+exports.login = (req, res, next) => {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) { return next(err); }
+        if (!user) {
+            return res.json({ status: 'error', message: info.message });
+        }
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            return res.json({ status: 'ok' });
+        });
+    })(req, res, next);
 };
