@@ -1,5 +1,9 @@
+const LOGIN_USER = "LOGIN_USER";
+const LOGOUT_USER = "LOGOUT_USER";
 const FILTER_EVENT_ITEMS = "FILTER_EVENT_ITEMS";
 
 module.exports = {
+    LOGIN_USER,
+    LOGOUT_USER,
     FILTER_EVENT_ITEMS
 };

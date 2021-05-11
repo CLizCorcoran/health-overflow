@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import '../sass/appsass.scss';
 
 
@@ -6,6 +7,7 @@ const Login = props => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [loggedIn, setLoggedIn] = useState(false);
     
 
     const handleSubmit = (evt) => {
@@ -26,6 +28,8 @@ const Login = props => {
         })
         .then (response => response.json())
         .then (data => {
+            props.onLogin(username);
+            setLoggedIn(true);
             console.log('Success:', data);
         })
         .catch((error) => {
@@ -33,6 +37,10 @@ const Login = props => {
         });
         
         alert('Got here!'); 
+    };
+
+    if (loggedIn) {
+        return <Redirect to="/" />;
     }
     
     return (

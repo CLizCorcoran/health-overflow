@@ -11,19 +11,36 @@ import '../css/journal.css';
 // The child component, NabTab is used for the List List link
 //  as well as for the Contact link.
 //---------------------------------------------------------------
-const NavBar = () => {
+const NavBar = props => {
 
-    return (
+    // If logged in
+    if (props.username !== "") {
+        return (
         <div className="navbar navbar-expand-lg navbar-dark bg-primary">
             <NavTab to="/" label="Health Overflow" />
    
             <div id="login">
-                <Link role="button" className="btn btn-primary mr-1 my-2 my-sm-0" to="/users/login">Log in</Link>  
-                <Link role="button" className="btn btn-secondary my-2 my-sm-0" to="/users/signup">Sign up</Link>  
+                <Link role="button" className="btn btn-primary mr-1 my-2 my-sm-0" to="/users/login"><i className="fas fa-user" title={props.username} /></Link>  
+                <Link role="button" className="btn btn-secondary my-2 my-sm-0" to="/users/signup">Log out</Link>  
             </div>
 
         </div>
-    );
+        )
+    }
+
+    else {
+        return (
+            <div className="navbar navbar-expand-lg navbar-dark bg-primary">
+                <NavTab to="/" label="Health Overflow" />
+    
+                <div id="login">
+                    <Link role="button" className="btn btn-primary mr-1 my-2 my-sm-0" to="/users/login">Log in</Link>  
+                    <Link role="button" className="btn btn-secondary my-2 my-sm-0" to="/users/signup">Sign up</Link>  
+                </div>
+
+            </div>
+        )
+    }
 };
 
 export default NavBar;

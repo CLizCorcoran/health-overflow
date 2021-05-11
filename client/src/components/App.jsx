@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
-import NavBar from "./NavBar";
+import NavBarContainer from "../containers/NavBarContainer";
 import Splash from "./Splash";
-import Login from "./Login";
+import LoginContainer from "../containers/LoginContainer";
 import Register from "./Register";
 import QuestionsContainer from "../containers/QuestionsContainer";
 import AskQuestion from "./AskQuestion";
@@ -24,11 +24,11 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <NavBar />
+        <NavBarContainer />
 
         <Switch>
           <Route exact from='/' component={Splash} />
-          <Route exact from='/users/login' component={Login} />
+          <Route exact from='/users/login' component={LoginContainer} />
           <Route exact from="/users/signup" component={Register} />
           <Route exact path="/questions" component={QuestionsContainer} />
           <Route exact path="/questions/ask" component={AskQuestion} />
