@@ -23,8 +23,8 @@ const QuestionDetail = match => {
     return (
         <div id="question_detail_page">
             <FilterContainer />            
-            <div className="container">
-                <h1>{question.title}</h1>
+            <div id="question_detail" className="container">
+                <h3 className="mb-4">{question.title}</h3>
                 <p>{question.description}</p>
             </div>
         </div>
