@@ -31,9 +31,9 @@ function App() {
           <Route exact from='/' component={Splash} />
           <Route exact from='/users/login' component={LoginContainer} />
           <Route exact from="/users/signup" component={Register} />
-          <Route exact path="/questions" component={QuestionsContainer} />
           <Route exact path="/questions/ask" component={AskQuestion} />
           <Route exact path="/questions/:id" component={QuestionDetail} />
+          <Route path="/questions" component={QuestionsContainer} />
         </Switch>
 
         <p>

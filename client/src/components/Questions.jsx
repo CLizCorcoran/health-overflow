@@ -62,24 +62,33 @@ const Questions = props => {
     //  happening over and over and over again.  
     //const [page, setPage] = useState(1);
     const [stuff, setStuff] = useState([]);
+    const [filter, setFilter] = useState("");
 
     useEffect(() => {
+
+        let filter = "";
         let url = "http://localhost:9000/api/questions/";
-        if (props.filter !== "all")
-            url += "?category=" + props.filter;
+        if (props.location.search) {
+            filter = props.location.search.slice(1);
+        }
+        if (filter != "" && filter !== "all")
+            url += "?category=" + filter;
+
+        setFilter(filter);
 
         fetch(url)
             .then(res => res.json())
             .then(response => {
                 console.log("Setting stuff");
                 setStuff(response);
+                setFilter(filter);
             })
             .catch(error => console.log(error));
-    }, [props.filter]);
+    }, [props.location.search]);
 
     let header = "All Questions";
     if (props.filter !== "all")
-        header = "Questions (" + props.filter + ")";
+        header = "Questions (" + filter + ")";
 
 
     return (
