@@ -6,6 +6,7 @@ import LoginContainer from "../containers/LoginContainer";
 import Register from "./Register";
 import QuestionsContainer from "../containers/QuestionsContainer";
 import AskQuestion from "./AskQuestion";
+import QuestionDetail from "./QuestionDetail";
 import '../css/journal.css';
 
 
@@ -32,6 +33,7 @@ function App() {
           <Route exact from="/users/signup" component={Register} />
           <Route exact path="/questions" component={QuestionsContainer} />
           <Route exact path="/questions/ask" component={AskQuestion} />
+          <Route exact path="/questions/:id" component={QuestionDetail} />
         </Switch>
 
         <p>

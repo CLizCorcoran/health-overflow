@@ -35,8 +35,9 @@ const Login = props => {
         .catch((error) => {
             console.error('Error:', error);
         });
-        
-        alert('Got here!'); 
+
+        setUsername("");
+        setPassword("");
     };
 
     if (loggedIn) {

@@ -71,6 +71,17 @@ $navColor: #eb6864;
 
 
 /*----------------------------------------------*/
+/* Question Detail Page                         */
+/*----------------------------------------------*/
+#question_detail_page {
+    border: 3px solid #fff;
+    padding: 20px;
+    display: flex;
+    align-content: flex-start;
+    max-width: 1000px;
+}
+
+/*----------------------------------------------*/
 /* Ask Question Form                            */
 /*----------------------------------------------*/
 

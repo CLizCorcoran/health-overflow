@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import Login from "../components/Login.jsx";
 import loginUser from "../actions/loginUser.js";
-import logoutUser from "../actions/logoutUser.js";
 
 const mapStateToProps = state => {
     return {
@@ -14,11 +13,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onLogin: (username) => {
             dispatch(loginUser(username));
-        },
-        onLogout: () => {
-            dispatch(logoutUser());
-            //dispatch(clearEvents());
-        }
+        } 
     };
 };
 

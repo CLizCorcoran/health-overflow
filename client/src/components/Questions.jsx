@@ -27,16 +27,28 @@ var questions = [
 
 const Question = props => {
 
+    const chopLen = 100;
+
+    let details = "";
+    if (props.details.length <= chopLen)
+        details = props.details;
+    else {
+        let spaceIdx = props.details.indexOf(" ", chopLen);
+        details = props.details.slice(0, spaceIdx);
+        if (details.length != props.details.length)
+            details += "...";
+    }
+
+    const questionLink = "/questions/" + props.id;
+
     return (
         <div>
             <div className="divStatistics text-muted small pr-2 mb-1" width="50px">
-                0<br /> Votes
-            <br />
             0<br /> Answers
             </div>
             <div className="question">
-                <Link className="strong" to="#">{props.question}</Link><br />
-                <span>{props.details}</span>
+                <Link className="strong" to={questionLink}>{props.question}</Link><br />
+                <span>{details}</span>
             </div>
             <br />
             <hr />
@@ -78,7 +90,8 @@ const Questions = props => {
                 <hr />
                 {stuff.map((item, i) => {
                     return (
-                        <Question key={i} question={item.title} details={item.description} />
+                        // Keys do not get passed to the component.  Use id for access.  
+                        <Question key={item.id} id={item.id} question={item.title} details={item.description} />
                        
                     )
                 })}
