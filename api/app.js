@@ -63,15 +63,17 @@ app.use(function(err, req, res, next) {
 
 // Sync health database
 const db = require("./models");
+db.questions.hasMany(db.comments, { as: "comments"});
+db.comments.belongsTo(db.questions, {
+  foreignKey: "questionId",
+  as: "question"
+});
+
 db.sequelize.sync();
 // In development, you may need to drop existing tables and re-sync database.
 //  This is done by setting force: true
 //db.sequelize.sync({ force: true }).then(() => {
 // console.log("Drop and re-sync db.");
 //});
-
-
-
-
 
 module.exports = app;

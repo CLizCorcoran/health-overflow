@@ -1,9 +1,10 @@
 const db = require("../models");
+const Sequelize = require("sequelize");
 const Question = db.questions;
-const Op = db.Sequelize.Op;
+const Comment = db.comments;
 
 // Create and Save a new Question
-exports.create = (req, res) => {
+exports.createQuestion = (req, res) => {
     // Validate request
     if (!req.body.title) {
         res.status(400).send({
@@ -21,13 +22,56 @@ exports.create = (req, res) => {
 
     // Save Question in the database
     Question.create(question)
-        .then(data=> {
+        .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: 
+                message:
                     err.message || "Some error occurred while creating the Question."
+            });
+        });
+};
+
+
+// Create and save new comments
+exports.createComment = (req, res) => {
+
+    // Todo:  add validation here.
+
+    const comment = {
+        questionId: req.params.id,
+        text: req.body.text
+    }
+
+    Comment.create(comment)
+        .then((data) => {
+            res.send(data);
+            console.log(">> Created comment:  " + JSON.stringify(data, null, 4));
+        })
+        .catch((err) => {
+            console.log(">> Error while creating comment: ", err);
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Comment."
+            });
+        });
+};
+
+
+// Get the comments for a given question
+exports.findCommentsByQuestionId = (req, res) => {
+    const questionId = req.params.id;
+
+    return Question.findByPk(questionId, { include: ["comments"] })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            console.log(">> Error while finding question: ", err);
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while fetching Comments."
             });
         });
 };
@@ -36,10 +80,20 @@ exports.create = (req, res) => {
 // Retrieve all Questions from the database
 exports.findAll = (req, res) => {
     const category = req.query.category;
-    var condition = category ? { category: `${category}`} : null;
+    var condition = category ? { category: `${category}` } : null;
     //var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-    Question.findAll({ where: condition })
+    Question.findAll({
+        where: condition,
+        subQuery: false,
+        attributes: {
+            include: [[Sequelize.fn("COUNT", Sequelize.col("comments.id")), "commentCount"]]
+        },
+        include: [{
+            model: Comment, attributes: [],
+            as: 'comments'
+        }]
+    })
         .then(data => {
             res.send(data);
         })
@@ -110,7 +164,7 @@ exports.delete = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message:  "Could not delete Question with id=" + id
+                message: "Could not delete Question with id=" + id
             });
         });
 };
@@ -123,7 +177,7 @@ exports.deleteAll = (req, res) => {
         truncate: false
     })
         .then(nums => {
-            res.send({ message: `${nums} Questions were deleted successfully!`});
+            res.send({ message: `${nums} Questions were deleted successfully!` });
         })
         .catch(err => {
             res.status(500).send({

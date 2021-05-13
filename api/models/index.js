@@ -19,6 +19,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.questions = require("./question.model.js")(sequelize, Sequelize);
+db.comments = require("./comment.model.js")(sequelize, Sequelize);
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 
 
