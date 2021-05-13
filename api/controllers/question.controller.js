@@ -85,7 +85,7 @@ exports.findAll = (req, res) => {
 
     Question.findAll({
         where: condition,
-        subQuery: false,
+        //subQuery: false,
         attributes: {
             include: [[Sequelize.fn("COUNT", Sequelize.col("comments.id")), "commentCount"]]
         },
@@ -95,7 +95,13 @@ exports.findAll = (req, res) => {
         }]
     })
         .then(data => {
-            res.send(data);
+            // Because of the COUNT include, one value is always returned.  Can't figure out how 
+            //  to keep this from happening.  This code simply sniffs this situation out.  
+            if (data.length == 1 && data[0].dataValues.id == null) {
+                res.send([]);
+            }
+            else
+                res.send(data);
         })
         .catch(err => {
             res.status(500).send({
