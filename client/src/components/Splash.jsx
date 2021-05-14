@@ -14,7 +14,7 @@ function Splash() {
     return (
         <div className="container-fluid" id="splash">
 
-            <h1 className="text-center mb-5"><i className="fas fa-heartbeat mr-2" title="Health Overflow" />Health Overflow</h1>
+            <h1 className="text-center mt-4 mb-5"><i className="fas fa-heartbeat mr-2" title="Health Overflow" />Health Overflow</h1>
 
             <h3 className="text-center">Where the world comes together to help each other grow in body, mind, and spirit.</h3>
             <div className="text-center mt-3">

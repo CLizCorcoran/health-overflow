@@ -96,7 +96,7 @@ const Questions = props => {
 
 
     return (
-        <div id="questions_page">
+        <div id="questions_page" className="container-fluid">
             <FilterContainer />
             <div id="questions" className="container">
                 <h3 className="mb-4">{header}<Link id="btnAsk" className="btn btn-primary" role="button" to="/questions/ask">Ask Question</Link></h3>

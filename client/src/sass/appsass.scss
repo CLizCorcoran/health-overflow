@@ -2,6 +2,41 @@
 
 $navColor: #eb6864;
 
+
+/*----------------------------------------------*/
+/* Nav Bar                                      */
+/*----------------------------------------------*/
+
+//#login {
+//    position: absolute;
+//    right: .5rem;
+//}
+
+// To push the login buttons to the right
+.navbar-brand {
+    flex-grow: 9;
+}
+
+#inner-navbar {
+    display: flex;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    max-width: 1250px;
+    width: 100%;
+    margin: auto;
+}
+
+#login {
+    align-self: flex-end;
+}
+
+
+/*----------------------------------------------*/
+/* Splash Page                                  */
+/*----------------------------------------------*/
+
 #splash {
     i {
         color: $navColor;
@@ -13,9 +48,14 @@ $navColor: #eb6864;
     }
 }
 
+
+/*----------------------------------------------*/
+/* Questions List Page                          */
+/*----------------------------------------------*/
+
 #questions_page {
     border: 3px solid #fff;
-    padding: 20px;
+    padding: 24px 16px;
     display: flex;
     align-content: flex-start;
     max-width: 1000px;
@@ -25,7 +65,7 @@ $navColor: #eb6864;
     width: 10em;
     display: inline-block;
     flex-grow: 0;
-    padding-right: 20px;    
+    padding-right: 32px;    
 }
 
 #questions {
@@ -64,9 +104,27 @@ $navColor: #eb6864;
 }
 
 
-#login {
-    position: absolute;
-    right: .5rem;
+
+/*----------------------------------------------*/
+/* Log in Page                                  */
+/*----------------------------------------------*/
+#login-container {
+    i {
+        color: $navColor;
+    }
+
+    form {
+        width: 250px;
+        margin: 0 auto;
+    }
+
+    input {
+        max-width: 250px;
+    }
+
+    button {
+        width: 250px;
+    }
 }
 
 
