@@ -7,7 +7,9 @@ import '../sass/appsass.scss';
 //-----------------------------------------------
 const FilterButton = props => {
 
-    let link = "/questions?" + props.id;
+    let link = "/questions";
+    if (props.id != "all")
+        link += "?" + props.id;
 
     var styleClass = "btn btn-secondary mb-1";
     //if (props.filter === props.id)
@@ -19,7 +21,8 @@ const FilterButton = props => {
               return false;
             }
 
-            const query = "?" + props.id;
+
+            const query = (props.id == "all") ? "" : "?" + props.id;
             if (location.search == query)
                 return true;
 

@@ -66,7 +66,7 @@ const Questions = props => {
     //  happening over and over and over again.  
     //const [page, setPage] = useState(1);
     const [stuff, setStuff] = useState([]);
-    const [filter, setFilter] = useState("");
+    const [filter, setFilter] = useState("all");
 
     useEffect(() => {
 
@@ -90,16 +90,22 @@ const Questions = props => {
             .catch(error => console.log(error));
     }, [props.location.search]);
 
+    // Build the header tag.
     let header = "All Questions";
-    if (props.filter !== "all")
+    if (filter !== "")
         header = "Questions (" + filter + ")";
+
+    // Build the ask question button - if user is logged in.
+    let askQuestion = null;
+    if (props.username != "")
+        askQuestion = <Link id="btnAsk" className="btn btn-primary" role="button" to="/questions/ask">Ask Question</Link>;
 
 
     return (
         <div id="questions_page" className="container-fluid">
             <FilterContainer />
             <div id="questions" className="container">
-                <h3 className="mb-4">{header}<Link id="btnAsk" className="btn btn-primary" role="button" to="/questions/ask">Ask Question</Link></h3>
+                <h3 className="mb-4">{header}{askQuestion}</h3>
                 <hr />
                 {stuff.map((item, i) => {
                     return (

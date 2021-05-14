@@ -3,7 +3,8 @@ import Questions from "../components/Questions";
 
 const mapStateToProps = state => {
     return {
-        filter: state.filterValue
+        filter: state.filterValue,
+        username: state.userData
     };
 };
 
