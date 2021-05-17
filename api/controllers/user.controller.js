@@ -62,7 +62,10 @@ function isValidPassword(password) {
 function isValidUsername(username) {
     var re = /^[a-zA-Z0-9]*$/;
     return re.test(String(username));
-}
+};
+
+
+
 
 // Create and Save a new User
 exports.create = async (req, res, next) => {
@@ -87,7 +90,7 @@ exports.create = async (req, res, next) => {
 
 
     try {
-        var user = User.create(userInfo);
+        var user = await User.create(userInfo);
     } catch (err) {
         return res.json({ status: 'error', message: 'Username already exists' });
     }

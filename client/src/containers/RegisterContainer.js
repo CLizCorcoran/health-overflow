@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Login from "../components/Login.jsx";
+import Register from "../components/Register.jsx";
 import loginUser from "../actions/loginUser.js";
 import recordError from "../actions/recordError.js";
 import clearError from "../actions/clearError.js";
@@ -28,6 +28,6 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login);
+const RegisterContainer = connect(mapStateToProps, mapDispatchToProps)(Register);
 
-export default LoginContainer;
+export default RegisterContainer;

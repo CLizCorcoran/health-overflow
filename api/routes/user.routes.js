@@ -1,4 +1,5 @@
 const passport = require("passport");
+const { verifySignUp } = require("../middleware");
 
 module.exports = app => {
   const users = require("../controllers/user.controller");
@@ -6,11 +7,13 @@ module.exports = app => {
   var router = require("express").Router();
 
 
-  // Handles register POST
-  router.post('/register', users.create);
+  // Route Registration Requests
+  router.post('/register', 
+              [ verifySignUp ],
+              users.create);
 
   
-  // Login POST
+  // Routes Login Requests
   router.post('/login', users.login);
 
   

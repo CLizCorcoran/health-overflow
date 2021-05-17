@@ -15,13 +15,14 @@ const NavBar = props => {
 
     // If logged in
     if (props.username !== "") {
+        const welcome = "Welcome " + props.username + "!";
         return (
             <div className="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div id="inner-navbar">
                     <NavTab to="/" label="Health Overflow" />
 
                     <div id="login">
-                        <Link role="button" className="btn btn-primary mr-1 my-2 my-sm-0" to="/users/login"><i className="fas fa-user" title={props.username} /></Link>
+                        <Link role="button" className="btn btn-primary mr-1 my-2 my-sm-0" to="/users/login"><i className="fas fa-user" title={welcome} /></Link>
                         <Link className="btn btn-secondary my-2 my-sm-0" to="/" onClick={() => { props.onLogout() }} >Log out</Link>
                     </div>
                 </div>

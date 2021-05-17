@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import FilterContainer from "../containers/FilterContainer.js";
+import Filter from "./Filter";
 import '../sass/appsass.scss';
 
 
@@ -59,7 +58,7 @@ const QuestionDetail = match => {
 
     return (
         <div id="question_detail_page">
-            <FilterContainer />
+            <Filter />
             <div id="question_detail">
                 <h3 className="mb-4">{question.title}</h3>
                 <p>{question.description}</p>

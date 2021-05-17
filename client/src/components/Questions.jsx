@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import FilterContainer from "../containers/FilterContainer.js";
-//import '../css/journal.css';
+import Filter from "./Filter";
 import '../sass/appsass.scss';
 
 var questions = [
@@ -103,7 +102,7 @@ const Questions = props => {
 
     return (
         <div id="questions_page" className="container-fluid">
-            <FilterContainer />
+            <Filter />
             <div id="questions" className="container">
                 <h3 className="mb-4">{header}{askQuestion}</h3>
                 <hr />

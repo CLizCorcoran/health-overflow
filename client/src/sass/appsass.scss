@@ -1,6 +1,7 @@
 @import '../css/journal.css';
 
 $navColor: #eb6864;
+$headerColor: #979797;
 
 
 /*----------------------------------------------*/
@@ -32,6 +33,22 @@ $navColor: #eb6864;
     align-self: flex-end;
 }
 
+
+/*----------------------------------------------*/
+/* Error Dialog                                 */
+/*----------------------------------------------*/
+.modal {
+    display: flex;
+}
+
+.modal-dialog {
+    min-width: 250px;
+}
+
+.modal-header {
+    background-color: $headerColor;
+    color: white;
+}
 
 /*----------------------------------------------*/
 /* Splash Page                                  */
@@ -108,7 +125,7 @@ $navColor: #eb6864;
 /*----------------------------------------------*/
 /* Log in Page                                  */
 /*----------------------------------------------*/
-#login-container {
+.login-container {
     i {
         color: $navColor;
     }

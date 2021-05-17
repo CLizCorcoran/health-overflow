@@ -28,11 +28,19 @@ const Login = props => {
         })
             .then(response => response.json())
             .then(data => {
-                props.onLogin(username);
-                setLoggedIn(true);
-                console.log('Success:', data);
+                if (data.status === "error") {
+                    props.onError("Login Error", data.message);
+                    console.log('Login error:  ', data.message);
+                }
+                else {
+                    props.onLogin(username);
+                    setLoggedIn(true);
+                    console.log('Login successful!');
+                }
+ 
             })
             .catch((error) => {
+                props.onError("Login Error", error.message);
                 console.error('Error:', error);
             });
 
@@ -45,7 +53,7 @@ const Login = props => {
     }
 
     return (
-        <div id="login-container" className="container-fluid">
+        <div className="container-fluid login-container">
             <h1 className="text-center mt-4 mb-5"><i className="fas fa-heartbeat mr-2" title="Health Overflow" />Health Overflow</h1>
             <form id="login-form" onSubmit={handleSubmit}>
                 <fieldset>

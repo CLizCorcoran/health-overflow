@@ -3,7 +3,8 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import NavBarContainer from "../containers/NavBarContainer";
 import Splash from "./Splash";
 import LoginContainer from "../containers/LoginContainer";
-import Register from "./Register";
+import ErrorContainer from "../containers/ErrorContainer";
+import RegisterContainer from "../containers/RegisterContainer";
 import QuestionsContainer from "../containers/QuestionsContainer";
 import AskQuestion from "./AskQuestion";
 import QuestionDetail from "./QuestionDetail";
@@ -26,11 +27,12 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <NavBarContainer />
+        <ErrorContainer />
 
         <Switch>
           <Route exact from='/' component={Splash} />
           <Route exact from='/users/login' component={LoginContainer} />
-          <Route exact from="/users/signup" component={Register} />
+          <Route exact from="/users/signup" component={RegisterContainer} />
           <Route exact path="/questions/ask" component={AskQuestion} />
           <Route exact path="/questions/:id" component={QuestionDetail} />
           <Route path="/questions" component={QuestionsContainer} />
