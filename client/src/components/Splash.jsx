@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import fruit from "../image/pexels-element-digital-775032.jpg";
 import pills from "../image/pexels-miguel-á-padriñán-806427.jpg";

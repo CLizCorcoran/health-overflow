@@ -3,8 +3,9 @@ import NavBar from "../components/NavBar";
 import logoutUser from "../actions/logoutUser.js";
 
 const mapStateToProps = state => {
+    let username = (state.userData) ? state.userData.username : "";
     return {
-        username: state.userData
+        username: username
     };
 };
 

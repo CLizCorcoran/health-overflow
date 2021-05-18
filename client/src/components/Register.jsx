@@ -35,7 +35,7 @@ const Register = props => {
                     console.log('Login error:  ', data.message);
                 }
                 else {
-                    props.onLogin(username);
+                    props.onLogin(username, data.token);
                     setLoggedIn(true);
                     console.log('Login successful!');
                 }

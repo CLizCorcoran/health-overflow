@@ -10,6 +10,7 @@ const handleErrors = response => {
         }
         throw Error(errorText);
     }
+    return response;
 }
 
 module.exports = handleErrors;

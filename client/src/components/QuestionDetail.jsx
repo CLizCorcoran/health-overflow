@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import handleErrors from "../constants/errors";
-import ErrorDialog from "./ErrorDialog";
 import Filter from "./Filter";
 import '../sass/appsass.scss';
 
@@ -8,10 +7,9 @@ import '../sass/appsass.scss';
 const QuestionDetail = match => {
     const [question, setQuestion] = useState([]);
     const [comments, setComments] = useState([]);
-    const [fetched, setFetched] = useState(false);
+    //const [fetched, setFetched] = useState(false);
     const [comment, setComment] = useState("");
-    const [error, setError] = useState(null);
-
+    
     useEffect(() => {
         //let { id } = useParams();
         let url = "http://localhost:9000/api/questions/" + match.match.params.id + "/comments";
@@ -21,10 +19,10 @@ const QuestionDetail = match => {
             .then(response => {
                 setQuestion(response);
                 setComments(response.comments);
-                setFetched(true);
+                //setFetched(true);
             })
             .catch(error => console.log(error));
-    }, [fetched]);
+    }, [match.match.params.id]);
 
 
     const handleSubmit = (evt) => {
@@ -50,7 +48,6 @@ const QuestionDetail = match => {
                 console.log('Success:', data);
             })
             .catch((error) => {
-                setError(error.message);
                 console.error('Error:', error);
             });
 
@@ -58,26 +55,29 @@ const QuestionDetail = match => {
 
     let commentHeader = comments.length + " Comment";
 
-    if (comments.length != 1)
+    if (comments.length !== 1)
         commentHeader += "s";
 
-    let errorDialog = error ? <ErrorDialog message={error} onClear={() => setError(null)} /> : "";
+    let commentForm = null;
+    if (match.user)
+        commentForm = (
+            <form id="comment-form" onSubmit={handleSubmit} >
+                <fieldset>
+                    <div className="form-group">
+                        <textarea className="form-control" id="comment" rows="3" required value={comment} onChange={(event) => setComment(event.target.value)} ></textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary">Post Comment</button>
+                </fieldset>
+            </form >
+        );
 
     return (
         <div id="question_detail_page">
-            { errorDialog }
             <Filter />
             <div id="question_detail">
                 <h3 className="mb-4">{question.title}</h3>
                 <p>{question.description}</p>
-                <form id="comment-form" onSubmit={handleSubmit}>
-                    <fieldset>
-                        <div className="form-group">
-                            <textarea className="form-control" id="comment" rows="3" required value={comment} onChange={(event) => setComment(event.target.value)} ></textarea>
-                        </div>
-                        <button type="submit" className="btn btn-primary">Post Comment</button>
-                    </fieldset>
-                </form>
+                { commentForm }
                 <div id="comments">
                     <h5 className="mt-5">{commentHeader}</h5>
                     {comments.map((item, i) => {

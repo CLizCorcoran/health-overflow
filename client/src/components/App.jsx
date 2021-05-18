@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBarContainer from "../containers/NavBarContainer";
 import Splash from "./Splash";
 import LoginContainer from "../containers/LoginContainer";
 import ErrorContainer from "../containers/ErrorContainer";
 import RegisterContainer from "../containers/RegisterContainer";
 import QuestionsContainer from "../containers/QuestionsContainer";
-import AskQuestion from "./AskQuestion";
-import QuestionDetail from "./QuestionDetail";
+import AskQuestionContainer from "../containers/AskQuestionContainer";
+import QuestionDetailContainer from "../containers/QuestionDetailContainer";
 import '../css/journal.css';
 
 
@@ -33,8 +33,8 @@ function App() {
           <Route exact from='/' component={Splash} />
           <Route exact from='/users/login' component={LoginContainer} />
           <Route exact from="/users/signup" component={RegisterContainer} />
-          <Route exact path="/questions/ask" component={AskQuestion} />
-          <Route exact path="/questions/:id" component={QuestionDetail} />
+          <Route exact path="/questions/ask" component={AskQuestionContainer} />
+          <Route exact path="/questions/:id" component={QuestionDetailContainer} />
           <Route path="/questions" component={QuestionsContainer} />
         </Switch>
 

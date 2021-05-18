@@ -1,5 +1,6 @@
 const db = require("../models");
 const Sequelize = require("sequelize");
+const { sequelize } = require("../models");
 const Question = db.questions;
 const Comment = db.comments;
 
@@ -77,31 +78,28 @@ exports.findCommentsByQuestionId = (req, res) => {
 };
 
 
-// Retrieve all Questions from the database
+// Retrieve all Questions from the database - inner query returns 
+//  the # of comments for each question.
+//  https://sequelize.org/master/manual/sub-queries.html
 exports.findAll = (req, res) => {
     const category = req.query.category;
     var condition = category ? { category: `${category}` } : null;
-    //var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-
+ 
     Question.findAll({
         where: condition,
-        //subQuery: false,
         attributes: {
-            include: [[Sequelize.fn("COUNT", Sequelize.col("comments.id")), "commentCount"]]
-        },
-        include: [{
-            model: Comment, attributes: [],
-            as: 'comments'
-        }]
+            include: [
+                [
+                    Sequelize.literal(
+                        '(SELECT count(*) FROM comments WHERE question.id = comments.questionId)'
+                    ),
+                    'commentCount'
+                ]
+            ]
+        }
     })
         .then(data => {
-            // Because of the COUNT include, one value is always returned.  Can't figure out how 
-            //  to keep this from happening.  This code simply sniffs this situation out.  
-            if (data.length == 1 && data[0].dataValues.id == null) {
-                res.send([]);
-            }
-            else
-                res.send(data);
+            res.send(data);
         })
         .catch(err => {
             res.status(500).send({

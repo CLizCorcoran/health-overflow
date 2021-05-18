@@ -6,7 +6,7 @@ import clearError from "../actions/clearError.js";
 
 const mapStateToProps = state => {
     return {
-        username: state.userData,
+        user: state.userData,
         error: state.errorData
     };
 };
@@ -14,8 +14,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: (username) => {
-            dispatch(loginUser(username));
+        onLogin: (username, token) => {
+            dispatch(loginUser(username, token));
         },
 
         onError: (title, description) => {

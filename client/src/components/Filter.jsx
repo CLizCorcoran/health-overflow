@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import '../sass/appsass.scss';
 
 //-----------------------------------------------
@@ -8,7 +8,7 @@ import '../sass/appsass.scss';
 const FilterButton = props => {
 
     let link = "/questions";
-    if (props.id != "all")
+    if (props.id !== "all")
         link += "?" + props.id;
 
     var styleClass = "btn btn-secondary mb-1";
@@ -22,8 +22,8 @@ const FilterButton = props => {
             }
 
 
-            const query = (props.id == "all") ? "" : "?" + props.id;
-            if (location.search == query)
+            const query = (props.id === "all") ? "" : "?" + props.id;
+            if (location.search === query)
                 return true;
 
             return false;        

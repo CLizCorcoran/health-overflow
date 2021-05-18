@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import handleErrors from "../constants/errors";
-import ErrorDialog from "./ErrorDialog";
 import '../sass/appsass.scss';
 
 const AskQuestion = props => {
@@ -8,7 +8,6 @@ const AskQuestion = props => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
-    const [error, setError] = useState(null);
 
     const handleSubmit = (evt) => {
         // Does not stop propagation but does stop default behavior.  
@@ -20,10 +19,12 @@ const AskQuestion = props => {
             category: category
         };
 
-        fetch('http://localhost:9000/api/questions', {
+        let url = 'http://localhost:9000/api/questions?secret_token=' + props.user.token;
+
+        fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -36,19 +37,19 @@ const AskQuestion = props => {
             console.log('Success:', data);
         })
         .catch((error) => {
-            setError(error.message);
+            props.onError("Error", error.message);
             console.error('Error:', error);
         });
-        
-        alert('Got here!');
     }
 
-    
-    let errorDialog = error ? <ErrorDialog message={error} onClear={() => setError(null)} /> : "";
+    if (props.user == null) {
+        props.onError("Error", "You must be logged in to ask a question.");
+        return <Redirect to="/users/login" />;
+    }
+        
 
     return (
         <div id="ask-container" className="container mt-5">
-            {errorDialog}
             <form id="ask-form" onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>Ask a question</legend>
