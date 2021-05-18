@@ -3,7 +3,11 @@ const User = db.user;
 var crypto = require('crypto');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
-const { nextTick } = require("process");
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
+const jwt = require('jsonwebtoken');
+
+//const { nextTick } = require("process");
 
 
 passport.use(new LocalStrategy(
@@ -26,6 +30,28 @@ passport.use(new LocalStrategy(
         return done(null, user);
     }
 ));
+
+
+// This code uses passport-jtw to extract the JWT from the query parameter.  
+//  It then verifies that this token has been signed with the secret or key
+//  set during logging in (TOP_SECRET).  If the token is valid, the user 
+//  details are passed to the next middleware.  
+passport.use(
+    'jwt',
+    new JWTstrategy(
+        {
+            secretOrKey: 'TOP_SECRET',
+            jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+        },
+        async (token, done) => {
+            try {
+                return done(null, token.user);
+            } catch (error) {
+                done(error);
+            }
+        }
+    )
+);
 
 User.prototype.verifyPassword = function(password) {
     var testpswd = crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('base64');
@@ -101,9 +127,12 @@ exports.create = async (req, res, next) => {
             if (!user) {
                 return res.json({ status: 'error', message: info.message });
             }
-            req.logIn(user, function (err) {
+            req.logIn(user, { session: false }, function (err) {
                 if (err) { return next(err); }
-                return res.json({ status: 'ok' });
+
+                const body = {_id: user._id, username: user.username };
+                const token = jwt.sign( { user: body }, 'TOP_SECRET');
+                return res.json({ status: 'ok', token: token });
             });
         })(req, res, next);
     }
@@ -116,9 +145,12 @@ exports.login = (req, res, next) => {
         if (!user) {
             return res.json({ status: 'error', message: info.message });
         }
-        req.logIn(user, function (err) {
+        req.logIn(user, { session: false }, function (err) {
             if (err) { return next(err); }
-            return res.json({ status: 'ok' });
+
+            const body = {_id: user._id, username: user.username };
+            const token = jwt.sign( { user: body }, 'TOP_SECRET');
+            return res.json({ status: 'ok', token: token });
         });
     })(req, res, next);
 };

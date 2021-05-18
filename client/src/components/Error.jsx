@@ -19,17 +19,17 @@ const Error = props => {
 
     // Otherwise return the modal error dialog.  
     return (
-        <div class="modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">{props.error.title}</h5>
+        <div className="modal">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">{props.error.title}</h5>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                         <p>{props.error.description}</p>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onClick={() => props.onClearError() } >Close</button>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary" onClick={() => props.onClearError() } >Close</button>
                     </div>
                 </div>
             </div>

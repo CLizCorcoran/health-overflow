@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import handleErrors from "../constants/errors";
+import ErrorDialog from "./ErrorDialog";
 import Filter from "./Filter";
 import '../sass/appsass.scss';
 
@@ -8,6 +10,7 @@ const QuestionDetail = match => {
     const [comments, setComments] = useState([]);
     const [fetched, setFetched] = useState(false);
     const [comment, setComment] = useState("");
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         //let { id } = useParams();
@@ -41,11 +44,13 @@ const QuestionDetail = match => {
             },
             body: JSON.stringify(data)
         })
+            .then(handleErrors)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
             })
             .catch((error) => {
+                setError(error.message);
                 console.error('Error:', error);
             });
 
@@ -56,8 +61,11 @@ const QuestionDetail = match => {
     if (comments.length != 1)
         commentHeader += "s";
 
+    let errorDialog = error ? <ErrorDialog message={error} onClear={() => setError(null)} /> : "";
+
     return (
         <div id="question_detail_page">
+            { errorDialog }
             <Filter />
             <div id="question_detail">
                 <h3 className="mb-4">{question.title}</h3>

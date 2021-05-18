@@ -16,6 +16,18 @@ module.exports = app => {
   // Routes Login Requests
   router.post('/login', users.login);
 
+
+  router.get('/profile', 
+              passport.authenticate('jwt', { session: false}),
+              (req,res, next) => {
+                res.json({
+                  message: 'You made it to the secure route',
+                  user: req.user,
+                  token: req.query.secret_token
+                })
+              }
+            );
+
   
   /* GET users listing. */
   //router.get('/', function (req, res, next) {

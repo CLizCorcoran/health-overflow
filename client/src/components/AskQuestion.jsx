@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import handleErrors from "../constants/errors";
+import ErrorDialog from "./ErrorDialog";
 import '../sass/appsass.scss';
 
 const AskQuestion = props => {
@@ -6,6 +8,7 @@ const AskQuestion = props => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
+    const [error, setError] = useState(null);
 
     const handleSubmit = (evt) => {
         // Does not stop propagation but does stop default behavior.  
@@ -24,19 +27,28 @@ const AskQuestion = props => {
             },
             body: JSON.stringify(data)
         })
-        .then (response => response.json())
-        .then (data => {
+        .then(handleErrors)
+        .then(response => {
+            console.log("Response:", response);
+            response.json()
+        })
+        .then(data => {
             console.log('Success:', data);
         })
         .catch((error) => {
+            setError(error.message);
             console.error('Error:', error);
         });
         
         alert('Got here!');
     }
 
+    
+    let errorDialog = error ? <ErrorDialog message={error} onClear={() => setError(null)} /> : "";
+
     return (
         <div id="ask-container" className="container mt-5">
+            {errorDialog}
             <form id="ask-form" onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>Ask a question</legend>

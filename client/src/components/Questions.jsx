@@ -38,7 +38,7 @@ const Question = props => {
             details += "...";
     }
 
-    const commentTxt = "Comment";
+    let commentTxt = "Comment";
     if (props.question.commentCount != 1)
         commentTxt += "s";
 
