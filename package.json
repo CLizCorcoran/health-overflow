@@ -2,8 +2,10 @@
     "name": "health-overflow",
     "version": "1.0.0",
     "scripts": {
-        "build": "(cd api && npm install) && (cd client && react-scripts build)",
+        "build": "concurrently \"npm run serverBuild\" \"npm run clientBuild\"",
         "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+        "clientBuild": "cd client && npm install",
+        "serverBuild": "cd api && npm install",
         "client": "cd client && npm start",
         "server": "cd api && npm start",
         "dev": "concurrently --kill-others-on-fail \"npm api\" \"npm client\""
