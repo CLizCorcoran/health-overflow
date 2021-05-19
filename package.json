@@ -7,7 +7,7 @@
         "server": "cd api && npm start",
         "dev": "concurrently --kill-others-on-fail \"npm api\" \"npm client\""
     },
-    "devDependencies": {
+    "dependencies": {
         "concurrently": "^4.1.2"
     }
 }
