@@ -1,0 +1,13 @@
+{
+    "name": "health-overflow",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+        "client": "cd client && npm start",
+        "server": "cd api && npm start",
+        "dev": "concurrently --kill-others-on-fail \"npm api\" \"npm client\""
+    },
+    "devDependencies": {
+        "concurrently": "^4.1.2"
+    }
+}
