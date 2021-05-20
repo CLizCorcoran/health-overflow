@@ -9,6 +9,8 @@ const AskQuestion = props => {
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
 
+    let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
+
     const handleSubmit = (evt) => {
         // Does not stop propagation but does stop default behavior.  
         evt.preventDefault();  
@@ -19,7 +21,7 @@ const AskQuestion = props => {
             category: category
         };
 
-        let url = 'http://localhost:9000/api/questions?secret_token=' + props.user.token;
+        let url = apiUrl + 'api/questions?secret_token=' + props.user.token;
 
         fetch(url, {
             method: 'POST',

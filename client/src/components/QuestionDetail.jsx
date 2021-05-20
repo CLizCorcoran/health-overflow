@@ -9,10 +9,12 @@ const QuestionDetail = match => {
     const [comments, setComments] = useState([]);
     //const [fetched, setFetched] = useState(false);
     const [comment, setComment] = useState("");
+
+    let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
     
     useEffect(() => {
         //let { id } = useParams();
-        let url = "http://localhost:9000/api/questions/" + match.match.params.id + "/comments";
+        let url = `${apiUrl}api/questions/` + match.match.params.id + "/comments";
 
         fetch(url)
             .then(res => res.json())
@@ -29,7 +31,7 @@ const QuestionDetail = match => {
         // Does not stop propagation but does stop default behavior.  
         evt.preventDefault();
 
-        let url = "http://localhost:9000/api/questions/" + question.id + "/comments";
+        let url = apiUrl + "api/questions/" + question.id + "/comments";
 
         const data = {
             text: comment

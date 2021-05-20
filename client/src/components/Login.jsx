@@ -9,6 +9,7 @@ const Login = props => {
     const [password, setPassword] = useState("");
     const [loggedIn, setLoggedIn] = useState(false);
 
+    let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
 
     const handleSubmit = (evt) => {
         // Does not stop propagation but does stop default behavior.  
@@ -19,7 +20,7 @@ const Login = props => {
             password: password
         };
 
-        fetch('http://localhost:9000/api/user/login', {
+        fetch(`${apiUrl}api/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

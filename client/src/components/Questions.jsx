@@ -47,10 +47,12 @@ const Questions = props => {
     const [stuff, setStuff] = useState([]);
     const [filter, setFilter] = useState("all");
 
+    let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
+
     useEffect(() => {
 
         let filter = "";
-        let url = "http://localhost:9000/api/questions/";
+        let url = `${apiUrl}api/questions/`;
         if (props.location.search) {
             filter = props.location.search.slice(1);
         }

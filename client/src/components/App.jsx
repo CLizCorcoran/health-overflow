@@ -14,8 +14,10 @@ import '../css/journal.css';
 function App() {
   const [apiResponse, setResponse] = useState("");
 
+  let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
+  
   function callAPI() {
-    fetch("http://localhost:9000/testAPI")
+    fetch(`${apiUrl}testAPI`)
       .then(res => res.text())
       .then(res => setResponse(res))
       .catch(err => setResponse(err));

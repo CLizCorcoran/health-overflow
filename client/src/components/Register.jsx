@@ -10,6 +10,8 @@ const Register = props => {
     const [email, setEmail] = useState("");
     const [loggedIn, setLoggedIn] = useState(false);
 
+    let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
+
 
     const handleSubmit = (evt) => {
         // Does not stop propagation but does stop default behavior.  
@@ -21,7 +23,7 @@ const Register = props => {
             email: email
         };
 
-        fetch('http://localhost:9000/api/user/register', {
+        fetch(`${apiUrl}api/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

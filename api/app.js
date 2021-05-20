@@ -20,9 +20,9 @@ var session = require('express-session');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-var corsOptions = {
-  origin: "http://localhost:9001"
-};
+//var corsOptions = {
+//  origin: "http://localhost:9001"
+//};
 
 app.use(cors());
 app.use(logger('dev'));
