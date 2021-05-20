@@ -69,7 +69,7 @@ const Questions = props => {
                 setFilter(filter);
             })
             .catch(error => console.log(error));
-    }, [props.location.search]);
+    }, [props.location.search, apiUrl]);
 
     // Build the header tag.
     let header = "All Questions";
@@ -85,7 +85,7 @@ const Questions = props => {
     return (
         <div id="questions_page" className="container-fluid">
             <Filter />
-            <div id="questions" className="container">
+            <div id="questions">
                 <h3 className="mb-4">{header}{askQuestion}</h3>
                 <hr />
                 {stuff.map((item, i) => {

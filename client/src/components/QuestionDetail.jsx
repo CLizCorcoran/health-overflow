@@ -7,7 +7,7 @@ import '../sass/appsass.scss';
 const QuestionDetail = match => {
     const [question, setQuestion] = useState([]);
     const [comments, setComments] = useState([]);
-    //const [fetched, setFetched] = useState(false);
+    const [fetched, setFetched] = useState(false);
     const [comment, setComment] = useState("");
 
     let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
@@ -21,17 +21,17 @@ const QuestionDetail = match => {
             .then(response => {
                 setQuestion(response);
                 setComments(response.comments);
-                //setFetched(true);
+                setFetched(true);
             })
             .catch(error => console.log(error));
-    }, [match.match.params.id]);
+    }, [match.match.params.id, fetched, apiUrl]);
 
 
     const handleSubmit = (evt) => {
         // Does not stop propagation but does stop default behavior.  
         evt.preventDefault();
 
-        let url = apiUrl + "api/questions/" + question.id + "/comments";
+        let url = apiUrl + "api/questions/" + question.id + "/comments?secret_token=" + match.user.token;
 
         const data = {
             text: comment
@@ -47,9 +47,12 @@ const QuestionDetail = match => {
             .then(handleErrors)
             .then(response => response.json())
             .then(data => {
+                setComment("");
+                setFetched(false);
                 console.log('Success:', data);
             })
             .catch((error) => {
+                match.onError("Error", error.message);
                 console.error('Error:', error);
             });
 
@@ -74,7 +77,7 @@ const QuestionDetail = match => {
         );
 
     return (
-        <div id="question_detail_page">
+        <div id="question_detail_page" className="container-fluid">
             <Filter />
             <div id="question_detail">
                 <h3 className="mb-4">{question.title}</h3>

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import QuestionDetail from "../components/QuestionDetail";
+import recordError from "../actions/recordError.js";
 
 
 const mapStateToProps = state => {
@@ -8,6 +9,15 @@ const mapStateToProps = state => {
     };
 };
 
-const QuestionDetailContainer = connect(mapStateToProps, null)(QuestionDetail);
+const mapDispatchToProps = dispatch => {
+    return {
+        onError: (title, description) => {
+            dispatch(recordError(title, description));
+        }
+
+    };
+};
+
+const QuestionDetailContainer = connect(mapStateToProps, mapDispatchToProps)(QuestionDetail);
 
 export default QuestionDetailContainer;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBarContainer from "../containers/NavBarContainer";
 import Splash from "./Splash";
@@ -12,18 +12,20 @@ import '../css/journal.css';
 
 
 function App() {
-  const [apiResponse, setResponse] = useState("");
+  //const [apiResponse, setResponse] = useState("");
 
-  let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
+  //let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
   
+  /*
   function callAPI() {
     fetch(`${apiUrl}testAPI`)
       .then(res => res.text())
       .then(res => setResponse(res))
       .catch(err => setResponse(err));
   };
+  */
 
-  callAPI();
+  //callAPI();
 
   return (
     <BrowserRouter>
@@ -39,10 +41,6 @@ function App() {
           <Route exact path="/questions/:id" component={QuestionDetailContainer} />
           <Route path="/questions" component={QuestionsContainer} />
         </Switch>
-
-        <p>
-          API Response: {apiResponse}
-        </p>
 
       </div>
     </BrowserRouter>

@@ -21,9 +21,8 @@ const FilterButton = props => {
               return false;
             }
 
-
             const query = (props.id === "all") ? "" : "?" + props.id;
-            if (location.search === query)
+            if (location.pathname === "/questions" && location.search === query)
                 return true;
 
             return false;        
