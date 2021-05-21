@@ -8,6 +8,9 @@ import '../css/journal.css';
 import '../sass/appsass.scss';
 
 
+//----------------------------------------------------------------
+// Renders the main homepage for Health Overflow
+//----------------------------------------------------------------
 function Splash() {
 
 

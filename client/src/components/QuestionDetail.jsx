@@ -4,6 +4,11 @@ import Filter from "./Filter";
 import '../sass/appsass.scss';
 
 
+//----------------------------------------------------------------
+// Renders the detail for a specific question.  
+//  Prior to rendering, a fetch call is made to the question 
+//  endpoint to get the information.  
+//----------------------------------------------------------------
 const QuestionDetail = match => {
     const [question, setQuestion] = useState([]);
     const [comments, setComments] = useState([]);

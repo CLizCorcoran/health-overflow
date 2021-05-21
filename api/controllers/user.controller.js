@@ -7,9 +7,11 @@ const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken');
 
-//const { nextTick } = require("process");
 
-
+//----------------------------------------------------------------
+// Sets up passport to use LocalStrategy.  Provides basic
+//  authentication login.  
+//----------------------------------------------------------------
 passport.use(new LocalStrategy(
     {
         usernameField: 'username',
@@ -32,10 +34,12 @@ passport.use(new LocalStrategy(
 ));
 
 
+//----------------------------------------------------------------
 // This code uses passport-jtw to extract the JWT from the query parameter.  
 //  It then verifies that this token has been signed with the secret or key
 //  set during logging in (TOP_SECRET).  If the token is valid, the user 
 //  details are passed to the next middleware.  
+//----------------------------------------------------------------
 passport.use(
     'jwt',
     new JWTstrategy(
@@ -53,6 +57,11 @@ passport.use(
     )
 );
 
+
+//----------------------------------------------------------------
+// Appended function to the User model.  Used to verify a particular
+//  user's password.  This bit took me way too long to figure out.  
+//----------------------------------------------------------------
 User.prototype.verifyPassword = function(password) {
     var testpswd = crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('base64');
     if (testpswd == this.password)
@@ -62,20 +71,25 @@ User.prototype.verifyPassword = function(password) {
 
 };
 
+
+//----------------------------------------------------------------
 // Passport serialization code
 //  http://www.passportjs.org/docs/configure/
+//----------------------------------------------------------------
 passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
   
-  passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function(user, done) {
     User.findById(id, function(err, user) {
       done(err, user);
     });
-  });
+});
 
 
+//----------------------------------------------------------------
 // Checks if password has > 8 characters
+//----------------------------------------------------------------
 function isValidPassword(password) {
     if (password.length >= 8) {
         return true;
@@ -84,16 +98,30 @@ function isValidPassword(password) {
 };
 
 
+//----------------------------------------------------------------
 // Uses a regex to check if username is valid
+//----------------------------------------------------------------
 function isValidUsername(username) {
     var re = /^[a-zA-Z0-9]*$/;
     return re.test(String(username));
 };
 
 
-
-
+//----------------------------------------------------------------
 // Create and Save a new User
+//
+//  /api/user/register   POST
+//
+//  Request Parameters:  
+//  'username':  string(required)  
+//  'password':  string(required)  
+//  'email':     string(optional)
+//
+//  *Successful Response (200 OK)*
+//
+//  Returns:  
+//  'token':  User token
+//----------------------------------------------------------------
 exports.create = async (req, res, next) => {
     var salt = crypto.randomBytes(64).toString('hex');
     var password = crypto.pbkdf2Sync(req.body.password, salt, 10000, 64, 'sha512').toString('base64');
@@ -139,6 +167,19 @@ exports.create = async (req, res, next) => {
 };
 
 
+//----------------------------------------------------------------
+// Logs a user in
+//
+//  /api/user/login   POST
+//
+//  Request Parameters:  
+//  'username':  string(required)  
+//  'password':  string(required)
+//
+//  *Successful Response (200 OK)*
+//
+//  'token':  User token
+//----------------------------------------------------------------
 exports.login = (req, res, next) => {
     passport.authenticate('local', function (err, user, info) {
         if (err) { return next(err); }

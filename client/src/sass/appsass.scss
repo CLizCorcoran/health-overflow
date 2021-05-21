@@ -96,11 +96,30 @@ $headerColor: #979797;
         color: $navColor;
     }
 
+    #question-header {
+        display: flex;
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+        width: 100%;
+
+        p {
+            flex-grow: 9;
+            font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+        }
+    }
+
     .divStatistics {
         float:left;
         width: 70px;
         text-align: center;
     }
+
+    #question-div {
+        display: flex;
+    }
+    
     .question {
         display: inline;
         
@@ -116,7 +135,7 @@ $headerColor: #979797;
     }
 
     #btnAsk {
-        float: right;
+        align-self: flex-end;
     }
 }
 
@@ -155,8 +174,11 @@ $headerColor: #979797;
     align-content: flex-start;
     max-width: 1150px;
 
+    form {
+        max-width: 850px;
+    }
+
     #question_detail {
-        min-width: 400px;
         min-height: 400px;
         flex-grow: 1000;
         display: inline-block;
@@ -176,4 +198,5 @@ $headerColor: #979797;
 #ask-form {
     background-color: white;
     margin: 20px;
+    max-width: 850px;
 }

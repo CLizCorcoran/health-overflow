@@ -5,12 +5,12 @@ import NavTab from "./NavTab";
 
 import '../css/journal.css';
 
-//---------------------------------------------------------------
+//----------------------------------------------------------------
 // The rendering and implementation of the Navigation bar.
 //
-// The child component, NabTab is used for the List List link
-//  as well as for the Contact link.
-//---------------------------------------------------------------
+// The child component, NabTab was taken from another one of my
+//  projects.  Ended up only being used for the Brand link.  
+//----------------------------------------------------------------
 const NavBar = props => {
 
     // If logged in
@@ -22,7 +22,7 @@ const NavBar = props => {
                     <NavTab to="/" label="Health Overflow" />
 
                     <div id="login">
-                        <Link role="button" className="btn btn-primary mr-1 my-2 my-sm-0" to="/users/login"><i className="fas fa-user" title={welcome} /></Link>
+                        <button className="btn btn-primary mr-1 my-2 my-sm-0"><i className="fas fa-user" title={welcome} /></button>
                         <Link className="btn btn-secondary my-2 my-sm-0" to="/" onClick={() => { props.onLogout() }} >Log out</Link>
                     </div>
                 </div>

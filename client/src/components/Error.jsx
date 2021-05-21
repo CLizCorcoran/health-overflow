@@ -1,7 +1,11 @@
 import React from "react";
 import '../sass/appsass.scss';
 
-
+//----------------------------------------------------------------
+// Renders an error dialog to the user.  
+//  Used in places like Log in when the username isn't recognized
+//  or the password isn't correct.
+//----------------------------------------------------------------
 const Error = props => {
 
     if (! props.error) {

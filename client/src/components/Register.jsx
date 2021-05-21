@@ -3,6 +3,17 @@ import { Redirect } from "react-router-dom";
 import '../sass/appsass.scss';
 
 
+//----------------------------------------------------------------
+// Renders the Registration form.
+//
+// At the point the user presses the 'Register' button, the 
+//  registration endpoint is used to register the user.
+//
+// Any errors are communicated to the user via an error dialog.  
+//  
+// Upon successful registration, the user is logged in and then
+//  redirected to the all questions page.  
+//----------------------------------------------------------------
 const Register = props => {
 
     const [username, setUsername] = useState("");

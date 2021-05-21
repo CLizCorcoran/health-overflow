@@ -3,11 +3,17 @@ import { Redirect } from "react-router-dom";
 import handleErrors from "../constants/errors";
 import '../sass/appsass.scss';
 
+//----------------------------------------------------------------
+// Render the form for the user to ask a question.  
+//  Upon the user pressing the 'Submit' button, the API to
+//  add the question to the database is sent.
+//----------------------------------------------------------------
 const AskQuestion = props => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("general");
+    const [redirect, setRedirect] = useState(false);
 
     let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000/';
 
@@ -36,7 +42,13 @@ const AskQuestion = props => {
             response.json()
         })
         .then(data => {
-            console.log('Success:', data);
+            if (data)
+                console.log('Success:', data);
+
+            setTitle("");
+            setDescription("");
+            setRedirect(true);
+            
         })
         .catch((error) => {
             props.onError("Error", error.message);
@@ -49,6 +61,9 @@ const AskQuestion = props => {
         return <Redirect to="/users/login" />;
     }
         
+    if (redirect) {
+        return <Redirect to="/questions" />;
+    }
 
     return (
         <div id="ask-container" className="container mt-5">

@@ -2,9 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import '../sass/appsass.scss';
 
-//-----------------------------------------------
+//----------------------------------------------------------------
 // Implements the Filter button functionality
-//-----------------------------------------------
+//  When the filter button is pressed, the page navigates to
+//  /questions?<category>
+//  (Unless the filter is all, then just /questions)
+//----------------------------------------------------------------
 const FilterButton = props => {
 
     let link = "/questions";

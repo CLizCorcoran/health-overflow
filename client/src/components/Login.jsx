@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import '../sass/appsass.scss';
 
-
+//----------------------------------------------------------------
+// Renders the form for login.  
+//  When the user presses the 'Log in' button, makes the server
+//  endpoint call to log in.  
+//  Any errors are communicated to the user through a dialog.
+//  Upon successful log in, the user is redirected to the all
+//  questions page.
+//----------------------------------------------------------------
 const Login = props => {
 
     const [username, setUsername] = useState("");

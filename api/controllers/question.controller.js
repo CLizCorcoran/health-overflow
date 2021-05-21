@@ -4,7 +4,18 @@ const { sequelize } = require("../models");
 const Question = db.questions;
 const Comment = db.comments;
 
+//----------------------------------------------------------------
 // Create and Save a new Question
+//
+//  /api/questions?secret_token=<token>  POST
+//
+//  Request Parameters:
+//  'title':  string(required)
+//  'description': string(required)
+//  'category': string(optional)
+//
+//  *Successful Response (200 OK)*
+//----------------------------------------------------------------
 exports.createQuestion = (req, res) => {
     // Validate request
     if (!req.body.title) {
@@ -14,14 +25,18 @@ exports.createQuestion = (req, res) => {
         return;
     }
 
+    //----------------------------------------------------------------
     // Create a Question
+    //----------------------------------------------------------------
     const question = {
         title: req.body.title,
         description: req.body.description,
         category: req.body.category
     };
 
+    //----------------------------------------------------------------
     // Save Question in the database
+    //----------------------------------------------------------------
     Question.create(question)
         .then(data => {
             res.send(data);
@@ -34,8 +49,9 @@ exports.createQuestion = (req, res) => {
         });
 };
 
-
+//----------------------------------------------------------------
 // Create and save new comments
+//----------------------------------------------------------------
 exports.createComment = (req, res) => {
 
     // Todo:  add validation here.
@@ -59,8 +75,9 @@ exports.createComment = (req, res) => {
         });
 };
 
-
+//----------------------------------------------------------------
 // Get the comments for a given question
+//----------------------------------------------------------------
 exports.findCommentsByQuestionId = (req, res) => {
     const questionId = req.params.id;
 
@@ -77,10 +94,28 @@ exports.findCommentsByQuestionId = (req, res) => {
         });
 };
 
-
+//----------------------------------------------------------------
 // Retrieve all Questions from the database - inner query returns 
 //  the # of comments for each question.
 //  https://sequelize.org/master/manual/sub-queries.html
+//
+//  /api/questions=<category>  GET
+//
+//  Valid Categories:
+//  exercise, food, mediation, supplements
+//
+//  Request Parameters:
+//  none
+//
+//  *Successful Response (200 OK)*
+//
+//  Return - an array of the following:
+//  'id':  Question id
+//  'title':  Question title
+//  'description':  Question text
+//  'commentCount':  How many comments are associated with this 
+//      question.  This one took some time to get right!
+//----------------------------------------------------------------
 exports.findAll = (req, res) => {
     const category = req.query.category;
     var condition = category ? { category: `${category}` } : null;
@@ -109,8 +144,9 @@ exports.findAll = (req, res) => {
         });
 };
 
-
+//----------------------------------------------------------------
 // Find a single Question with an id
+//----------------------------------------------------------------
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
@@ -125,8 +161,9 @@ exports.findOne = (req, res) => {
         });
 };
 
-
+//----------------------------------------------------------------
 // Update a Question by the id in the request
+//----------------------------------------------------------------
 exports.update = (req, res) => {
     const id = req.params.id;
 
@@ -147,8 +184,9 @@ exports.update = (req, res) => {
         });
 };
 
-
+//----------------------------------------------------------------
 // Delete a Question with the specified id in the request
+//----------------------------------------------------------------
 exports.delete = (req, res) => {
     const id = req.params.id;
 
@@ -174,7 +212,9 @@ exports.delete = (req, res) => {
 };
 
 
+//----------------------------------------------------------------
 // Delete all Questions from the database.
+//----------------------------------------------------------------
 exports.deleteAll = (req, res) => {
     Question.destroy({
         where: {},
