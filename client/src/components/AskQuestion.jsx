@@ -24,7 +24,7 @@ const AskQuestion = props => {
         const data = {
             title: title,
             description: description,
-            category: category
+            category: category.toLowerCase()
         };
 
         let url = apiUrl + 'api/questions?secret_token=' + props.user.token;

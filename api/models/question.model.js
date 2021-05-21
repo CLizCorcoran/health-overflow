@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         category: {
             type: Sequelize.ENUM,
-            values: ['general', 'exercise','food', 'supplements'],
+            values: ['general', 'exercise','food', 'supplements', 'meditation'],
             allowNull: false,
             defaultValue: 'general'
         }

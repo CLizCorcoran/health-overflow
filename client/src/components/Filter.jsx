@@ -42,7 +42,7 @@ const Filter = props => {
             <FilterButton label="All" id="all"  onChange={() => props.onFilter("all") } />
             <FilterButton label="Food" id="food"  onChange={() => props.onFilter("food") } />
             <FilterButton label="Exercise" id="exercise"  onChange={() => props.onFilter("exercise") } />
-            <FilterButton label="Mediation" id="meditation"  onChange={() => props.onFilter("mediation") } />
+            <FilterButton label="Meditation" id="meditation"  onChange={() => props.onFilter("meditation") } />
             <FilterButton label="Supplements" id="supplements"  onChange={() => props.onFilter("supplements") } />
         </div>
     );

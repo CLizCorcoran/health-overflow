@@ -86,7 +86,7 @@ This also returns a count for the number of comments pertaining for this questio
 /api/questions?category=<category>  GET
 
 Valid Categories:
-exercise, food, mediation, supplements
+exercise, food, meditation, supplements
 
 Request Parameters:
 none

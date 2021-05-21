@@ -102,7 +102,7 @@ exports.findCommentsByQuestionId = (req, res) => {
 //  /api/questions=<category>  GET
 //
 //  Valid Categories:
-//  exercise, food, mediation, supplements
+//  exercise, food, meditation, supplements
 //
 //  Request Parameters:
 //  none
