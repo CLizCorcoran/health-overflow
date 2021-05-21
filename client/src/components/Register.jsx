@@ -58,7 +58,6 @@ const Register = props => {
                 console.error('Error:', error);
             });
 
-        alert('Got here!');
     }
 
     // If logged in, go ahead and redirect to the main page.  
