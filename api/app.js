@@ -69,7 +69,7 @@ db.comments.belongsTo(db.questions, {
   as: "question"
 });
 
-db.sequelize.sync({ force: true });
+db.sequelize.sync();
 // In development, you may need to drop existing tables and re-sync database.
 //  This is done by setting force: true
 //db.sequelize.sync({ force: true }).then(() => {
