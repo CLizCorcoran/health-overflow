@@ -7,7 +7,6 @@ The client enables users to ask questions around health and to post comments on 
 The project can be run directly through the following link:
 https://health-overflow-client.herokuapp.com/
 
-
 The server's API project contains a README file for a description of the API's used for this project.  
 
 

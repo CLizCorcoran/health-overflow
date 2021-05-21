@@ -6,6 +6,10 @@ The client enables users to ask questions around health and to post comments on 
 
 This readme file describes the API used by the Health Overflow client.  
 
+The server can be accessed on Heroku at:
+https://health-overflow-server.herokuapp.com/
+
+
 
 ## Authentication Endpoints
 
